@@ -40,7 +40,9 @@
    {:db (-> db
             (assoc :ns-loading? false)
             (assoc :ns-error nil)
-            (assoc :ns (:body (js->clj response :keywordize-keys true))))}))
+            (assoc :ns (->> (js->clj response :keywordize-keys true)
+                            :body
+                            (sort-by :name))))}))
 
 (refx/reg-event-db
  :app.ns/get-error
@@ -68,13 +70,15 @@
 
 ;; app
 (defnc app []
-  (let [loading? (refx/use-sub [:app.ns/loading])
+  (let [lib "org.clojure/clojure.json"
+        base-git "https://github.com/clojure/clojure/tree/clojure-1.11.1/src/clj/"
+        loading? (refx/use-sub [:app.ns/loading])
         [error error-res] (refx/use-sub [:app.ns/error])
         ns-docs (refx/use-sub [:app.ns/docs])]
 
     (hooks/use-effect
-     :once
-     (refx/dispatch [:app.ns/get "clojure.json"]))
+      :once
+      (refx/dispatch [:app.ns/get lib]))
 
     (d/div
      (d/h1 "clojuredocs-helix")
@@ -86,9 +90,12 @@
        (d/div "Loading... "))
 
      (for [ns-doc ns-docs]
-       (d/div
+       (d/section
         {:key (:name ns-doc)}
-        (d/p (str (:name ns-doc) ": " (:author ns-doc))))))))
+        (d/h2 (d/a {:href (str "#/" (:var-definitions ns-doc))} (:name ns-doc)))
+        (d/pre (:doc ns-doc))
+        (d/p (d/a {:href (str base-git (:filename ns-doc))} (:filename ns-doc)))
+        (d/h6 (when (:author ns-doc) (str "by: " (:author ns-doc)))))))))
 
 ;; start your app with your React renderer
 (defonce root
