@@ -2,7 +2,9 @@
 {:source-paths ["src" "test"]
  :dependencies [[com.fbeyer/refx "0.0.49"]
                 [lambdaisland/fetch "1.2.69"]
-                [lilactown/helix "0.1.9"]]
+                [lilactown/helix "0.1.9"]
+                [metosin/reitit-malli "0.6.0"]
+                [metosin/reitit-frontend "0.6.0"]]
  :builds {:app {:target           :browser
                 :devtools         {:http-port 8000
                                    :http-root "public"
