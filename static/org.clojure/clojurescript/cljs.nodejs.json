@@ -1,0 +1,1 @@
+[{"end-row":16,"filename":"cljs/nodejs.cljs","name":"require","ns":"cljs.nodejs","row":16},{"end-row":17,"filename":"cljs/nodejs.cljs","name":"process","ns":"cljs.nodejs","row":17},{"arglist-strs":["[]"],"end-row":27,"filename":"cljs/nodejs.cljs","fixed-arities":[0],"name":"enable-util-print!","ns":"cljs.nodejs","row":19}]

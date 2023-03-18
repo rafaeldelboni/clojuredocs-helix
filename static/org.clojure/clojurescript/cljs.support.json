@@ -1,0 +1,1 @@
+[{"end-row":18,"ns":"cljs.support","name":"assert-args","lang":"clj","filename":"cljs/support.cljc","macro":true,"arglist-strs":["[fnname & pairs]"],"doc":"Internal - do not use!","row":11},{"end-row":18,"ns":"cljs.support","name":"assert-args","lang":"cljs","filename":"cljs/support.cljc","macro":true,"arglist-strs":["[fnname & pairs]"],"doc":"Internal - do not use!","row":11}]
