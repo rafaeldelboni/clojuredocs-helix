@@ -28,7 +28,7 @@
  (fn
    [{db :db} [_ ns-name]]
    {:http {:method      :get
-           :url         (str "/static/" ns-name)
+           :url         (str "./static/" ns-name)
            :accept      :json
            :on-success  [:app.ns/get-done]
            :on-failure  [:app.ns/get-error]}
