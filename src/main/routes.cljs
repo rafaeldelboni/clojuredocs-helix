@@ -1,8 +1,10 @@
 (ns main.routes
-  (:require [main.pages.home.views :as home.views]
+  (:require [main.pages.definition.views :as definition.views]
+            [main.pages.home.views :as home.views]
             [main.pages.library.views :as library.views]
-            [main.routes.subs]
+            [main.pages.organization.views :as organization.views]
             [main.routes.events]
+            [main.routes.subs]
             [refx.alpha :as refx]
             [reitit.coercion.malli :as rcm]
             [reitit.frontend :as rf]
@@ -14,16 +16,16 @@
     {:view home.views/page
      :name :routes/home-page}]
    [":organization"
-    {:view library.views/organization-page
+    {:view organization.views/page
      :name :routes/organization
      :parameters {:path {:organization string?}}}]
    [":organization/:library"
-    {:view library.views/library-page
+    {:view library.views/page
      :name :routes/organization.library
      :parameters {:path {:organization string?
                          :library string?}}}]
    [":organization/:library/:definition"
-    {:view library.views/definition-page
+    {:view definition.views/page
      :name :routes/organization.library.definition
      :parameters {:path {:organization string?
                          :library string?

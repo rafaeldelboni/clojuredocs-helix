@@ -2,16 +2,16 @@
   (:require [refx.alpha :as refx]))
 
 (refx/reg-sub
- :app.ns/docs
+ :app.library/docs
  (fn [db]
-   (:ns db)))
+   (:library db)))
 
 (refx/reg-sub
- :app.ns/loading
+ :app.library/loading
  (fn [db]
-   (:ns-loading? db)))
+   (:library-loading? db)))
 
 (refx/reg-sub
- :app.ns/error
+ :app.library/error
  (fn [db]
-   (:ns-error db)))
+   (:library-error db)))

@@ -3,37 +3,37 @@
 
 ;; todo cache this
 (refx/reg-event-fx
- :app.ns/get-done
+ :app.library/get-done
  (fn
    [{db :db} [_ response]]
    {:db (-> db
-            (assoc :ns-loading? false)
-            (assoc :ns-error nil)
-            (assoc :ns (->> (js->clj response :keywordize-keys true)
+            (assoc :library-loading? false)
+            (assoc :library-error nil)
+            (assoc :library (->> (js->clj response :keywordize-keys true)
                             :body
                             (sort-by :name))))}))
 
 (refx/reg-event-db
- :app.ns/get-error
+ :app.library/get-error
  (fn
    [db [key-error val-error]]
    (println key-error val-error)
    (-> db
-       (assoc :ns-loading? false)
-       (assoc :ns-error [key-error (:body val-error)])
-       (assoc :ns nil))))
+       (assoc :library-loading? false)
+       (assoc :library-error [key-error (:body val-error)])
+       (assoc :library nil))))
 
 (refx/reg-event-fx
- :app.ns/get
+ :app.library/get
  (fn
-   [{db :db} [_ ns-name]]
+   [{db :db} [_ lib-name]]
    {:http {:method      :get
-           :url         (str "./static/" ns-name)
+           :url         (str "./static/" lib-name)
            :accept      :json
-           :on-success  [:app.ns/get-done]
-           :on-failure  [:app.ns/get-error]}
+           :on-success  [:app.library/get-done]
+           :on-failure  [:app.library/get-error]}
     :db  (assoc db
-                :ns nil
-                :ns-error nil
-                :ns-loading? true)}))
+                :library nil
+                :library-error nil
+                :library-loading? true)}))
 
