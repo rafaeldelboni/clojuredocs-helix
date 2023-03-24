@@ -10,8 +10,8 @@
             (assoc :library-loading? false)
             (assoc :library-error nil)
             (assoc :library (->> (js->clj response :keywordize-keys true)
-                            :body
-                            (sort-by :name))))}))
+                                 :body
+                                 (sort-by :name))))}))
 
 (refx/reg-event-db
  :app.library/get-error

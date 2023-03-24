@@ -1,1 +1,1 @@
-[{"arglist-strs":["[env & body]"],"end-row":16,"filename":"cljs/compiler/macros.clj","macro":true,"name":"emit-wrap","ns":"cljs.compiler.macros","row":12}]
+[{"end-row":16,"name-end-col":20,"name-end-row":12,"name-row":12,"ns":"cljs.compiler.macros","name":"emit-wrap","defined-by":"clojure.core/defmacro","filename":"cljs/compiler/macros.clj","macro":true,"col":1,"name-col":11,"end-col":71,"arglist-strs":["[env & body]"],"varargs-min-arity":1,"row":12}]

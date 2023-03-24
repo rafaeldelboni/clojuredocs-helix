@@ -1,1 +1,1 @@
-[{"arglist-strs":["[form]"],"end-row":13,"filename":"clojure/uuid.clj","fixed-arities":[1],"name":"default-uuid-reader","ns":"clojure.uuid","private":true,"row":11}]
+[{"fixed-arities":[1],"end-row":13,"name-end-col":27,"name-end-row":11,"private":true,"name-row":11,"ns":"clojure.uuid","name":"default-uuid-reader","defined-by":"clojure.core/defn-","filename":"clojure/uuid.clj","col":1,"name-col":8,"end-col":36,"arglist-strs":["[form]"],"row":11}]

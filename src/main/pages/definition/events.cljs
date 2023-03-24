@@ -10,8 +10,8 @@
             (assoc :definition-loading? false)
             (assoc :definition-error nil)
             (assoc :definition (->> (js->clj response :keywordize-keys true)
-                            :body
-                            (sort-by :name))))}))
+                                    :body
+                                    (sort-by :name))))}))
 
 (refx/reg-event-db
  :app.definition/get-error
