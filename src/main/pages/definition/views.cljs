@@ -7,15 +7,8 @@
             [main.pages.definition.subs]
             [refx.alpha :as refx]))
 
-;; todo use state to get this info and not this
-(defn ->git [arguments]
-  (case (:library arguments)
-    "clojure" "https://github.com/clojure/clojure/tree/clojure-1.11.1/src/clj/"
-    "https://github.com/clojure/clojurescript/tree/r1.11.60/src/main/clojure/"))
-
 (defnc page [{:keys [route]}]
   (let [arguments (-> route :parameters :path)
-        base-git (->git arguments)
         loading? (refx/use-sub [:app.definition/loading])
         [error error-res] (refx/use-sub [:app.definition/error])
         def-docs (refx/use-sub [:app.definition/docs])]
@@ -51,6 +44,6 @@
           (d/h2 (:name def-doc))
           (d/pre (:doc def-doc))
           (d/p
-           (d/a {:href (str base-git (:filename def-doc) "#L" (:row def-doc))}
+           (d/a {:href (:git-source def-doc)}
                 (str (:filename def-doc) ":" (:row def-doc))))
           (d/h6 (when (:author def-doc) (str "by: " (:author def-doc))))))))))
