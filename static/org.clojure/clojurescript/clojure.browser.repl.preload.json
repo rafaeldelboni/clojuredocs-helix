@@ -1,1 +1,1 @@
-[{"end-row":13,"filename":"clojure/browser/repl/preload.cljs","name":"conn","ns":"clojure.browser.repl.preload","row":12}]
+[{"end-row":13,"name-end-col":14,"name-end-row":12,"name-row":12,"ns":"clojure.browser.repl.preload","name":"conn","defined-by":"cljs.core/defonce","filename":"clojure/browser/repl/preload.cljs","col":1,"name-col":10,"end-col":66,"row":12}]
