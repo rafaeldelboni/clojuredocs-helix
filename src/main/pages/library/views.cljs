@@ -37,7 +37,7 @@
                      (:filename lib-doc)
                      file-type)}
           (d/h2
-           (d/a {:href (str "#/" (:var-definitions lib-doc))}
+           (d/a {:href (str "#/" (:definitions lib-doc))}
                 (str (:name lib-doc) " (" file-type ")")))
           (d/pre (:doc lib-doc))
           (d/p

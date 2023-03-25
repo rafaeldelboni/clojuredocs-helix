@@ -1,6 +1,5 @@
 (ns main.routes
   (:require [main.pages.definition.views :as definition.views]
-            [main.pages.home.views :as home.views]
             [main.pages.library.views :as library.views]
             [main.pages.organization.views :as organization.views]
             [main.routes.events]
@@ -13,7 +12,7 @@
 (def routes
   ["/"
    [""
-    {:view home.views/page
+    {:view organization.views/home
      :name :routes/home-page}]
    [":organization"
     {:view organization.views/page

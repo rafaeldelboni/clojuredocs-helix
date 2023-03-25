@@ -6,6 +6,32 @@
             [main.pages.organization.subs]
             [refx.alpha :as refx]))
 
+(defnc home []
+  (let [loading? (refx/use-sub [:app.organization/loading])
+        [error error-res] (refx/use-sub [:app.organization/error])
+        org-docs (refx/use-sub [:app.organization/docs])]
+
+    (hooks/use-effect
+      :once
+      (refx/dispatch [:app.organization/get nil]))
+
+    (d/div
+     "Home page"
+
+     (when error
+       (d/div (str "Error: " error-res)))
+
+     (when loading?
+       (d/div "Loading... "))
+
+     (for [[group-name group-values] (group-by :organization org-docs)]
+       (d/section
+        {:key group-name}
+        (d/h2
+         (d/a {:href (str "#/" group-name)} group-name))
+        (d/div
+         (d/p (str "libraries: " (count group-values)))))))))
+
 (defnc page [{:keys [route]}]
   (let [arguments (-> route :parameters :path)
         loading? (refx/use-sub [:app.organization/loading])
@@ -14,7 +40,7 @@
 
     (hooks/use-effect
       [arguments]
-      (refx/dispatch [:app.organization/get (str (:organization arguments) ".json")]))
+      (refx/dispatch [:app.organization/get (:organization arguments)]))
 
     (d/div
 
@@ -24,10 +50,15 @@
      (when loading?
        (d/div "Loading... "))
 
-     (for [org-doc org-docs]
+     (for [{:keys [project library tag sha paths url]} org-docs]
        (d/section
-        {:key (str (:organization arguments) (:name org-doc))}
-        (d/h2
-         (d/a {:href (str "#/" (:var-definitions org-doc))} (:name org-doc)))
-        (d/pre (:doc org-doc))
-        (d/h6 (str "version: " (:version org-doc))))))))
+          {:key library}
+          (d/h2
+           (d/a {:href (str "#/" project)} library))
+          (d/div
+           (d/p (str "version: " tag))
+           (d/p (str "sha: " sha))
+           (d/p (str "paths: " paths)))
+          (d/a {:href url} (d/small "source")))))))
+
+

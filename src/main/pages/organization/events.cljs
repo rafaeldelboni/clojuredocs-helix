@@ -5,22 +5,25 @@
 (refx/reg-event-fx
  :app.organization/get-done
  (fn
-   [{db :db} [_ response]]
+   [{db :db} [_ org-name response]]
    {:db (-> db
             (assoc :organization-loading? false)
             (assoc :organization-error nil)
             (assoc :organization (->> (js->clj response :keywordize-keys true)
                                       :body
+                                      (filter #(if org-name
+                                                 (= org-name (:organization %))
+                                                 true))
                                       (sort-by :name))))}))
 
 (refx/reg-event-db
  :app.organization/get-error
  (fn
-   [db [key-error val-error]]
-   (println key-error val-error)
+   [db [event-name org-name response]]
+   (println event-name org-name response)
    (-> db
        (assoc :organization-loading? false)
-       (assoc :organization-error [key-error (:body val-error)])
+       (assoc :organization-error [event-name (:body response)])
        (assoc :organization nil))))
 
 (refx/reg-event-fx
@@ -28,10 +31,10 @@
  (fn
    [{db :db} [_ org-name]]
    {:http {:method      :get
-           :url         (str "./static/" org-name)
+           :url         "./static/root.json"
            :accept      :json
-           :on-success  [:app.organization/get-done]
-           :on-failure  [:app.organization/get-error]}
+           :on-success  [:app.organization/get-done org-name]
+           :on-failure  [:app.organization/get-error org-name]}
     :db  (assoc db
                 :organization nil
                 :organization-error nil
