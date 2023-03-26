@@ -36,12 +36,10 @@
                      (:library arguments)
                      (:filename lib-doc)
                      file-type)}
-          (d/h2
-           (d/a {:href (str "#/" (:definitions lib-doc))}
-                (str (:name lib-doc) " (" file-type ")")))
+          (d/h2 (d/a {:href (str "#/" (:definitions lib-doc))} (:name lib-doc)))
+          (when (seq file-type)
+            (d/small (str "langs: " (string/join ", " file-type))))
           (d/pre (:doc lib-doc))
           (d/p
            (d/a {:href (:git-source lib-doc)}
-                (str (:filename lib-doc) ":" (:row lib-doc))))
-          (d/h6 (when (:author lib-doc) (str "by: " (:author lib-doc))))))))))
-
+                (str (:filename lib-doc) ":" (:row lib-doc))))))))))
