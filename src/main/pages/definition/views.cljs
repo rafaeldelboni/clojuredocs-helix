@@ -41,7 +41,13 @@
                      (:name def-doc)
                      (:row def-doc)
                      file-type)}
-          (d/h2 (:name def-doc))
+          (d/h2
+           (d/a {:href (str "#/"
+                            (:organization arguments) "/"
+                            (:library arguments) "/"
+                            (:definition arguments) "/"
+                            (:name def-doc))}
+                (:name def-doc)))
           (d/pre (:doc def-doc))
           (d/p
            (d/a {:href (:git-source def-doc)}

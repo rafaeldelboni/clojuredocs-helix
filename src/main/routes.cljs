@@ -34,6 +34,9 @@
                          :library string?
                          :definition string?}}}]
 
+   ;; todo better url for this
+   ;; some macros and defs have the same namespace/name
+   ;; but are located in different files eg helix.core/$ (clj/cljs)
    [":organization/:library/:definition/:var"
     {:view var.views/page
      :name :routes/organization.library.definition.var

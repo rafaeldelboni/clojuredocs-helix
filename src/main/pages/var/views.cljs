@@ -1,5 +1,6 @@
 (ns main.pages.var.views
-  (:require [helix.dom :as d]
+  (:require [clojure.string :as str]
+            [helix.dom :as d]
             [helix.hooks :as hooks]
             [main.lib :refer [defnc]]
             [main.pages.var.events]
@@ -19,23 +20,30 @@
                                         (:library arguments)
                                         "/"
                                         (:definition arguments)
-                                        ".json")]))
+                                        ".json")
+
+                      (:var arguments)]))
 
     (d/div
-
      (when error
        (d/div (str "Error: " error-res)))
 
      (when loading?
        (d/div "Loading... "))
 
-     (println var-doc)
-
      (d/section
       {:key ""}
       (d/h2 (:name var-doc))
-      (d/pre (:doc var-doc))
       (d/p
-       (d/a {:href (:git-source var-doc)}
-            (str (:filename var-doc) ":" (:row var-doc))))
-      (d/h6 (when (:author var-doc) (str "by: " (:author var-doc))))))))
+       (d/small
+        (when (:added var-doc) (str "since: " (:added var-doc) " ")))
+       (d/small
+        (d/a {:href (:git-source var-doc)}
+             "(source)")))
+      (d/ul
+       (for [arglist (:arglist-strs var-doc)]
+         (d/li
+          {:key (str/join " " arglist)}
+          (d/pre
+           (str "(" (:name var-doc)  " " arglist ")")))))
+      (d/pre (if (:doc var-doc) (:doc var-doc) "no-doc"))))))
