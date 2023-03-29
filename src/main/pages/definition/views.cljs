@@ -37,7 +37,6 @@
           {:key (str (:organization arguments)
                      (:library arguments)
                      (:definition arguments)
-                     (:filename def-doc)
                      (:name def-doc)
                      (:row def-doc)
                      file-type)}
