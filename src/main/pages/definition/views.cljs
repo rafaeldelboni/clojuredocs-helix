@@ -31,15 +31,13 @@
        (d/div "Loading... "))
 
      (for [def-doc def-docs]
-       (let [file-extension (-> def-doc :filename (string/split ".") last)
-             file-type (or (:lang def-doc) file-extension)]
-         (d/section
-          {:key (str (:organization arguments)
+       (let [id (str (:organization arguments)
                      (:library arguments)
                      (:definition arguments)
                      (:name def-doc)
-                     (:row def-doc)
-                     file-type)}
+                     (:row def-doc))]
+         (d/section
+          {:id id :key id}
           (d/h2
            (d/a {:href (str "#/"
                             (:organization arguments) "/"
