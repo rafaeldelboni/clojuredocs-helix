@@ -22,7 +22,8 @@
                                         (:definition arguments)
                                         ".json")
 
-                      (:var arguments)]))
+                      (:var arguments)
+                      (or (:index arguments) 0)]))
 
     (d/div
      (when error

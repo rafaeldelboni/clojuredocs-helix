@@ -1,6 +1,5 @@
 (ns main.pages.definition.views
-  (:require [clojure.string :as string]
-            [helix.dom :as d]
+  (:require [helix.dom :as d]
             [helix.hooks :as hooks]
             [main.lib :refer [defnc]]
             [main.pages.definition.events]
@@ -43,10 +42,13 @@
                             (:organization arguments) "/"
                             (:library arguments) "/"
                             (:definition arguments) "/"
-                            (:name def-doc))}
+                            (:name def-doc)
+                            (when-not (zero? (:index def-doc))
+                              (str "/" (:index def-doc))))}
                 (:name def-doc)))
           (d/pre (:doc def-doc))
           (d/p
            (d/a {:href (:git-source def-doc)}
                 (str (:filename def-doc) ":" (:row def-doc))))
           (d/h6 (when (:author def-doc) (str "by: " (:author def-doc))))))))))
+

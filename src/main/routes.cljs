@@ -34,16 +34,25 @@
                          :library string?
                          :definition string?}}}]
 
-   ;; todo better url for this
-   ;; some macros and defs have the same namespace/name
-   ;; but are located in different files eg helix.core/$ (clj/cljs)
    [":organization/:library/:definition/:var"
     {:view var.views/page
      :name :routes/organization.library.definition.var
      :parameters {:path {:organization string?
                          :library string?
                          :definition string?
-                         :var string?}}}]])
+                         :var string?}}}]
+
+   ;; some macros and defs have the same namespace/name
+   ;; but are located in different files eg helix.core/$ (clj/cljs)
+   ;; so we generate an index for those
+   [":organization/:library/:definition/:var/:index"
+    {:view var.views/page
+     :name :routes/organization.library.definition.var.index
+     :parameters {:path {:organization string?
+                         :library string?
+                         :definition string?
+                         :var string?
+                         :index integer?}}}]])
 
 (defn router []
   (rf/router routes {:data {:coercion rcm/coercion}}))
